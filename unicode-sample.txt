@@ -3,7 +3,7 @@
 Café cafe. über uber
 
 Word with smart punctuation: don‘t. Vs. Don't. Some words with
-other oddities. 😀 em–dash em—dash. Trademark™. $1.00
+other oddities. 😀 em-dash em—dash. Trademark™. $1.00
 
 It's like 2 + 2 = …fish!
 
@@ -15,4 +15,3 @@ AURORÆ AURORAE
 
 ## Cyrilic
 я люблю сыр.
-I like cheese.

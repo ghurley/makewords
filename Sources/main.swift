@@ -2,6 +2,30 @@ import ArgumentParser
 import Foundation
 
 
+// foldAndTrim takes a word and, depending on the flags passed in, downcases it, folds non-latin
+// diacritics and trims non-alphanumeric chars from the beginning and ending of the word.
+// e.g. "Café." might become "cafe". Swift's `alphanumerics` enum includes alphabets, 
+// syllabaries, ideographs, and digits but not emojis, mathematical symbols or
+// things like $, etc.
+func foldAndTrim(word: String, trim: Bool, downcase: Bool, foldDiacritics: Bool) -> String {
+	var newWord = word
+	var foldingOptions: NSString.CompareOptions = []
+	if downcase {
+		foldingOptions.insert(.caseInsensitive)
+	}
+	if foldDiacritics {
+		foldingOptions.insert(.diacriticInsensitive)
+	}
+	if !foldingOptions.isEmpty {
+		newWord = word.folding(options: foldingOptions, locale: Locale.current)
+	}
+	if trim {
+		newWord = newWord.trimmingCharacters(in: .alphanumerics.inverted)
+	}
+	
+	return newWord
+}
+
 struct MakeWords: ParsableCommand {
     static let configuration = CommandConfiguration(abstract: "split input into words",
                                                     version: "0.1.0")
@@ -23,13 +47,20 @@ struct MakeWords: ParsableCommand {
 
 
     mutating func run() throws {
-        if let fileData = try fileHandle.readToEnd() {
-            let fileContents = String(decoding: fileData, as: UTF8.self)
-            print("grapheme clusters (~ characters): \(fileContents.count)")
+        guard let fileData = try fileHandle.readToEnd() else {
+            return
         }
-
-        let fileDisplayName = inputFile?.absoluteString ?? "<stdin>"
-        print("makewords \(fileDisplayName)")
+        
+        let fileContents = String(decoding: fileData, as: UTF8.self)
+        let words = fileContents.components(separatedBy: .whitespacesAndNewlines).map{
+            foldAndTrim(word: $0, trim:true, downcase:true, foldDiacritics:false)
+        }.filter {
+            $0.count > 0
+        }
+        
+        for word in words {
+            print("\(word)")
+        }
 
     }
 }
