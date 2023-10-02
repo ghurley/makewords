@@ -1,0 +1,5 @@
+私はチーズが好きです
+"I like cheese."
+
+The above Japanese contains both syllabic characters (hiragana) and non-syllabic
+characters (Kanji).
