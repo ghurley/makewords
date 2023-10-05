@@ -20,7 +20,8 @@ func foldAndTrim(word: String, trim: Bool, downcase: Bool, foldDiacritics: Bool)
 		newWord = word.folding(options: foldingOptions, locale: Locale.current)
 	}
 	if trim {
-		newWord = newWord.trimmingCharacters(in: .alphanumerics.inverted)
+		// newWord = newWord.trimmingCharacters(in: .alphanumerics.inverted)
+		newWord = newWord.trimmingCharacters(in: .punctuationCharacters)
 	}
 	
 	return newWord
@@ -35,6 +36,15 @@ struct MakeWords: ParsableCommand {
         completion: .file(), transform: URL.init(fileURLWithPath:))
     var inputFile: URL? = nil
 
+    @Flag(
+        help: "Strip all non-alphanumerics from beginning/end of each word instead of only punctuation."
+    )
+    var stripNonAlphaNum = false
+
+    @Flag(
+        help: "Do not downcase words"
+    )
+    var noDowncase = false
 
     var fileHandle: FileHandle {
         get throws {

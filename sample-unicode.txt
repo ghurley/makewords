@@ -1,0 +1,43 @@
+“Words are like bullets and I let 'em pass right through me.”
+
+## Diacritics
+Café cafe. über uber
+
+## Punctuation and more
+Word with smart punctuation: don‘t. Vs. Don't. Some words with
+other oddities. emoji 😀 em-dash em—dash. Trademark™. $1.00 ~strike~ [square]
+(paren) -dash-
+
+#foo
+
+It's like 2 + 2 = …fish!
+
+## URLS
+https://www.youtube.com/watch?v=kZ89YQsoqBY&t=13s
+
+## Ligatures
+auroræ aurorae
+AURORÆ AURORAE
+ﬁne fine
+ﬂash flash
+
+## Box drawing
+┌────┐
+⎸ box ⎹
+└────┘
+In markdown I'm *bold*.
+
+## Cyrilic
+я люблю сыр.
+
+## HTML and BiDi
+<span>בינלאומי!</span>
+
+פרטים אודות הקונסורציום של יוניקוד
+
+## JSON
+[
+    {
+        "JSONkey": "JSONvalue"
+    }
+]
